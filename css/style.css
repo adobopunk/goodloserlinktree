@@ -1,0 +1,187 @@
+/* ---------------------------------------------------
+   Good Loser — brand tokens
+   Bloody   #B02724  (red)
+   Peach    #E8A69E  (light peach — background/accent only, fails text contrast)
+   Sailor   #6BB7E5  (sky blue)
+   Eyeball  #214181  (navy)
+--------------------------------------------------- */
+:root {
+  --gl-red: #B02724;
+  --gl-peach: #E8A69E;
+  --gl-sky: #6BB7E5;
+  --gl-navy: #214181;
+  --gl-ink: #1a1a1a;
+  --gl-paper: #FFFDF9;
+
+  /* Pico overrides so the framework's defaults match the brand instead of fighting it */
+  --pico-font-family: "IBM Plex Sans", system-ui, sans-serif;
+  --pico-background-color: var(--gl-paper);
+  --pico-color: var(--gl-ink);
+  --pico-primary: var(--gl-navy);
+  --pico-primary-hover: var(--gl-red);
+  --pico-primary-underline: none;
+  --pico-typography-spacing-vertical: 0.75rem;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  padding: 2rem 1rem 3rem;
+  background:
+    radial-gradient(circle at 18% 8%, rgba(232,166,158,0.35), transparent 45%),
+    radial-gradient(circle at 85% 92%, rgba(107,183,229,0.25), transparent 45%),
+    var(--gl-paper);
+}
+
+.wrap {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+/* Profile / hero */
+.profile {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 1rem;
+  width: clamp(96px, 28vw, 140px);
+  height: auto;
+}
+
+.tagline {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 500;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  color: var(--gl-navy);
+  max-width: 30ch;
+  margin: 0 auto;
+}
+
+/* Link buttons */
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-bottom: 2.25rem;
+}
+
+.link-btn {
+  display: block;
+  text-align: center;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 1.02rem;
+  letter-spacing: 0.01em;
+  color: var(--gl-navy);
+  background: var(--gl-paper);
+  border: 2.5px solid var(--gl-navy);
+  border-radius: 999px;
+  padding: 0.85rem 1.25rem;
+  text-decoration: none;
+  transition: transform 0.12s ease, background-color 0.12s ease, color 0.12s ease;
+}
+
+.link-btn:hover,
+.link-btn:focus-visible {
+  background: var(--gl-navy);
+  color: var(--gl-paper);
+  transform: translateY(-1px);
+}
+
+.link-btn:active {
+  transform: translateY(0);
+}
+
+.link-btn:focus-visible {
+  outline: 3px solid var(--gl-sky);
+  outline-offset: 2px;
+}
+
+.link-btn--primary {
+  background: var(--gl-navy);
+  color: var(--gl-paper);
+}
+
+.link-btn--primary:hover,
+.link-btn--primary:focus-visible {
+  background: var(--gl-red);
+  border-color: var(--gl-red);
+  color: var(--gl-paper);
+}
+
+.link-btn--accent {
+  border-color: var(--gl-red);
+  color: var(--gl-red);
+}
+
+.link-btn--accent:hover,
+.link-btn--accent:focus-visible {
+  background: var(--gl-red);
+  color: var(--gl-paper);
+}
+
+/* Social row */
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--gl-navy);
+  color: var(--gl-navy);
+  transition: background-color 0.12s ease, color 0.12s ease, transform 0.12s ease;
+}
+
+.social-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.social-icon:hover,
+.social-icon:focus-visible {
+  background: var(--gl-sky);
+  border-color: var(--gl-sky);
+  color: var(--gl-navy);
+  transform: translateY(-1px);
+}
+
+.social-icon:focus-visible {
+  outline: 3px solid var(--gl-peach);
+  outline-offset: 2px;
+}
+
+/* Footer */
+.site-footer {
+  text-align: center;
+  font-size: 0.85rem;
+  color: color-mix(in srgb, var(--gl-navy) 55%, transparent);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .link-btn,
+  .social-icon {
+    transition: none;
+  }
+}
+
+/* Slightly wider breathing room on larger screens; content still caps at 440px */
+@media (min-width: 640px) {
+  body {
+    padding-top: 4rem;
+  }
+}
