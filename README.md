@@ -3,7 +3,8 @@
 Static linktree page. No build step, no dependencies to install.
 
 ## Files
-- `index.html` — page content and structure
+- `index.html` — page content and structure (English)
+- `es/index.html` — Spanish version of the same page, served at `/es/`
 - `css/style.css` — brand styling (loaded after Pico.css, which is pulled from CDN)
 - `assets/logo.png` — provided logo
 - `netlify.toml` — tells Netlify to publish the repo root with no build command
@@ -25,6 +26,8 @@ Static linktree page. No build step, no dependencies to install.
 
 ## Editing links later
 Each link is a plain `<a class="link-btn">` in `index.html` — edit the `href` and the visible text directly, no build tooling required.
+
+The English and Spanish pages are separate files: when you add, remove or reorder a link, make the same change in both `index.html` and `es/index.html`.
 
 ## Things worth checking before you ship this
 - The page depends on two CDNs (jsDelivr for Pico.css, Google Fonts). If either goes down, the page still renders — just with browser-default fonts and unstyled base elements — but it's a dependency worth knowing about. If you want zero external dependencies, I can inline Pico.css and self-host the fonts instead.

@@ -137,7 +137,7 @@ body {
 	color: var(--gl-paper);
 }
 
-/* Expandable "support the projects" group */
+/* Expandable dropdown groups */
 .link-group {
 	border: none;
 	padding: 0;
@@ -145,12 +145,16 @@ body {
 }
 
 .link-group summary {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 0.5rem;
+	position: relative;
 	list-style: none;
 	cursor: pointer;
+	/* Pico colors <summary> through these variables (with high-specificity
+	   selectors), so set them rather than fighting with `color` */
+	--pico-accordion-close-summary-color: var(--gl-navy);
+	--pico-accordion-open-summary-color: var(--gl-navy);
+	--pico-accordion-active-summary-color: var(--gl-navy);
+	/* Reserve room on both sides so the label stays centered clear of the badge */
+	padding-inline: 3.25rem;
 }
 
 .link-group summary::-webkit-details-marker {
@@ -162,37 +166,60 @@ body {
 	display: none;
 }
 
+/* Pico draws its own accordion icon; ours is the .chevron badge */
 .link-group summary::after {
+	display: none;
+}
+
+/* Round badge pinned inside the right edge of the pill */
+.chevron {
+	position: absolute;
+	top: 50%;
+	right: 0.4rem;
+	width: 2.1rem;
+	height: 2.1rem;
+	transform: translateY(-50%);
+	border-radius: 50%;
+	background: var(--gl-navy);
+	transition: background-color 0.12s ease;
+}
+
+.chevron::before {
 	content: '';
-	width: 7px;
-	height: 7px;
-	flex-shrink: 0;
-	border-right: 2px solid currentColor;
-	border-bottom: 2px solid currentColor;
-	transform: rotate(45deg);
-	transition: transform 0.2s ease;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 8px;
+	height: 8px;
+	border-right: 2.5px solid var(--gl-paper);
+	border-bottom: 2.5px solid var(--gl-paper);
+	transform: translate(-50%, -70%) rotate(45deg);
+	transition: transform 0.2s ease, border-color 0.12s ease;
 }
 
-.link-group[open] summary::after {
-	transform: rotate(-135deg);
+.link-group[open]:not(.is-closing) .chevron::before {
+	transform: translate(-50%, -30%) rotate(-135deg);
 }
 
-/* Grid-rows trick: animates height without JS and without a fixed
-   max-height guess. Overrides the browser's default display:none on
-   closed <details> content so the transition has something to animate. */
-.link-group > .sub-links-wrap {
-	display: grid;
-	grid-template-rows: 0fr;
-	transition: grid-template-rows 0.25s ease;
+.link-group summary:hover,
+.link-group summary:focus-visible {
+	--pico-accordion-close-summary-color: var(--gl-paper);
+	--pico-accordion-open-summary-color: var(--gl-paper);
+	--pico-accordion-active-summary-color: var(--gl-paper);
 }
 
-.link-group[open] > .sub-links-wrap {
-	grid-template-rows: 1fr;
+.link-group summary:hover .chevron,
+.link-group summary:focus-visible .chevron {
+	background: var(--gl-paper);
 }
 
+.link-group summary:hover .chevron::before,
+.link-group summary:focus-visible .chevron::before {
+	border-color: var(--gl-navy);
+}
+
+/* Open/close animation lives in js/dropdowns.js */
 .sub-links-inner {
-	overflow: hidden;
-	min-height: 0;
 	display: flex;
 	flex-direction: column;
 	gap: 0.9rem;
@@ -227,12 +254,85 @@ body {
 	outline-offset: 2px;
 }
 
+/* Red (accent) variant of a dropdown, matching .link-btn--accent */
+.link-group summary.link-btn--accent:not(:hover):not(:focus-visible) {
+	--pico-accordion-close-summary-color: var(--gl-red);
+	--pico-accordion-open-summary-color: var(--gl-red);
+	--pico-accordion-active-summary-color: var(--gl-red);
+}
+
+.link-btn--accent .chevron {
+	background: var(--gl-red);
+}
+
+.link-group summary.link-btn--accent:hover .chevron::before,
+.link-group summary.link-btn--accent:focus-visible .chevron::before {
+	border-color: var(--gl-red);
+}
+
 /* Respect reduced motion for the disclosure too */
 @media (prefers-reduced-motion: reduce) {
-	.link-group > .sub-links-wrap,
-	.link-group summary::after {
+	.chevron,
+	.chevron::before {
 		transition: none;
 	}
+}
+
+/* Labelled cluster of links (e.g. "Latest Stories") */
+.link-set {
+	display: flex;
+	flex-direction: column;
+	gap: 0.9rem;
+}
+
+.set-label {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin: 0.35rem 0 -0.35rem;
+	font-size: 0.72rem;
+	font-weight: 500;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: color-mix(in srgb, var(--gl-navy) 55%, transparent);
+}
+
+/* Closing hairline so it's clear where the set ends */
+.link-set::after {
+	content: '';
+	height: 1px;
+	margin-top: 0.35rem;
+	background: color-mix(in srgb, var(--gl-navy) 20%, transparent);
+}
+
+.set-label::before,
+.set-label::after {
+	content: '';
+	flex: 1;
+	height: 1px;
+	background: color-mix(in srgb, var(--gl-navy) 20%, transparent);
+}
+
+/* Language toggle */
+.lang-switch {
+	display: flex;
+	justify-content: flex-end;
+	margin: -1rem 0 0.5rem;
+}
+
+.lang-switch a {
+	font-size: 0.85rem;
+	font-weight: 500;
+	color: var(--gl-navy);
+	text-decoration: underline;
+	text-underline-offset: 0.2em;
+	text-decoration-color: color-mix(in srgb, var(--gl-navy) 35%, transparent);
+}
+
+.lang-switch a:hover,
+.lang-switch a:focus-visible {
+	color: var(--gl-red);
+	text-decoration-color: currentColor;
 }
 
 /* Social row */
