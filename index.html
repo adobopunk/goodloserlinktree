@@ -21,6 +21,9 @@
 		<meta property="og:image" content="assets/logo.png" />
 		<meta property="og:type" content="website" />
 
+		<link rel="alternate" hreflang="en" href="/" />
+		<link rel="alternate" hreflang="es" href="/es/" />
+
 		<link rel="icon" type="image/png" href="assets/logo.png" />
 
 		<!-- Pico.css: classless-friendly base framework, mobile-first by default -->
@@ -40,6 +43,10 @@
 	</head>
 	<body>
 		<main class="wrap">
+			<nav class="lang-switch" aria-label="Language">
+				<a href="/es/" hreflang="es" lang="es">Español</a>
+			</nav>
+
 			<header class="profile">
 				<img
 					class="logo"
@@ -55,6 +62,47 @@
 			</header>
 
 			<section class="links" aria-label="Links">
+				<details class="link-group">
+					<summary class="link-btn link-btn--accent">
+						WA Voter Tools
+						<span class="chevron" aria-hidden="true"></span>
+					</summary>
+					<div class="sub-links-wrap">
+						<div class="sub-links-inner">
+							<a
+								class="sub-link"
+								href="https://www.sos.wa.gov/elections/voters/voter-registration/register-vote-washington"
+							>
+								Register to Vote
+							</a>
+							<a
+								class="sub-link"
+								href="https://voter.votewa.gov/portal2023/login.aspx"
+							>
+								Track Ballot
+							</a>
+							<a
+								class="sub-link"
+								href="https://www.sos.wa.gov/elections/data-research/election-data-and-maps/election-results-and-voters-pamphlets/2026-general-election-voters-guide"
+							>
+								WA Voter Guide
+							</a>
+							<a
+								class="sub-link"
+								href="https://tricitiesvote.com/"
+							>
+								Tri-Cities Vote
+							</a>
+							<a
+								class="sub-link"
+								href="https://www.google.com/maps/d/viewer?mid=1qEF8pzR0orFz7Nmf7WvT-z6Byn5D0-c&ll=47.3168,-120.8257&z=7"
+							>
+								Ballot Drop Box Map
+							</a>
+						</div>
+					</div>
+				</details>
+
 				<a
 					class="link-btn link-btn--primary"
 					href="https://www.goodloser.me/about/#/portal/"
@@ -62,67 +110,50 @@
 					Sign Up For Updates
 				</a>
 
-				<details class="link-group">
-					<summary
+				<div class="link-set">
+					<p class="set-label">Latest Documentaries</p>
+					<a
 						class="link-btn"
-						style="
-							color: var(
-								--pico-accordion-active-summary-color
-							);
-						"
+						href="https://www.goodloser.me/estamos-aqui-25-mile-march-celebrates-latino-culture-and-immigrant-workers"
 					>
-						Links + Resources
-					</summary>
-					<div class="sub-links-wrap">
-						<div class="sub-links-inner">
-							<a
-								class="sub-link"
-								href="https://yakimaresponsenetwork.org/"
-							>
-								Yakima Immigrant Response Network
-							</a>
-							<a
-								class="sub-link"
-								href="https://www.weareherewalk.org/donate"
-							>
-								We Are Here Walk
-							</a>
-							<a
-								class="sub-link"
-								href="https://iwillvote.com/"
-							>
-								Register to Vote
-							</a>
+						Immigrant March
+					</a>
+					<a
+						class="link-btn"
+						href="https://www.goodloser.me/good-loser-goes-one-on-one-with-john-duresky/"
+					>
+						John Duresky Interview
+					</a>
+					<a
+						class="link-btn"
+						href="https://www.goodloser.me/spokanes-hardcore-scene/"
+					>
+						Crucial Times Fest
+					</a>
+
+					<details class="link-group">
+						<summary class="link-btn">
+							Related Links + Resources
+							<span class="chevron" aria-hidden="true"></span>
+						</summary>
+						<div class="sub-links-wrap">
+							<div class="sub-links-inner">
+								<a
+									class="sub-link"
+									href="https://yakimaresponsenetwork.org/"
+								>
+									Yakima Immigrant Response Network
+								</a>
+								<a
+									class="sub-link"
+									href="https://www.weareherewalk.org/donate"
+								>
+									We Are Here Walk
+								</a>
+							</div>
 						</div>
-					</div>
-				</details>
-
-				<!-- <a
-					class="link-btn"
-					href="https://www.goodloser.me/spokanes-hardcore-scene/"
-				>
-					We Are Here Walk Mini-Doc
-				</a> -->
-
-				<a
-					class="link-btn"
-					href="https://www.goodloser.me/estamos-aqui-25-mile-march-celebrates-latino-culture-and-immigrant-workers"
-				>
-					Immigrant March
-				</a>
-				<a
-					class="link-btn"
-					href="https://www.goodloser.me/good-loser-goes-one-on-one-with-john-duresky/"
-				>
-					John Duresky Interview
-				</a>
-
-				<a
-					class="link-btn"
-					href="https://www.goodloser.me/spokanes-hardcore-scene/"
-				>
-					Crucial Times Fest
-				</a>
+					</details>
+				</div>
 
 				<a
 					class="link-btn link-btn--accent"
@@ -131,7 +162,7 @@
 					Support Good Loser
 				</a>
 				<a class="link-btn" href="https://goodloser.me">
-					More stories
+					More documentaries
 				</a>
 			</section>
 
@@ -268,6 +299,7 @@
 			</footer>
 		</main>
 
+		<script src="js/dropdowns.js"></script>
 		<script>
 			document.getElementById('year').textContent =
 				new Date().getFullYear();
