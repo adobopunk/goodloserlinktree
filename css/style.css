@@ -13,6 +13,10 @@
 	--gl-ink: #1a1a1a;
 	--gl-paper: #fffdf9;
 
+	/* One corner radius for every link. It's about half a one-line button's
+	   height, so single lines still read as pills while taller cards match. */
+	--gl-radius: 1.75rem;
+
 	/* Pico overrides so the framework's defaults match the brand instead of fighting it */
 	--pico-font-family: 'IBM Plex Sans', system-ui, sans-serif;
 	--pico-background-color: var(--gl-paper);
@@ -90,7 +94,7 @@ body {
 	color: var(--gl-navy);
 	background: var(--gl-paper);
 	border: 2.5px solid var(--gl-navy);
-	border-radius: 999px;
+	border-radius: var(--gl-radius);
 	padding: 0.85rem 1.25rem;
 	text-decoration: none;
 	margin-bottom: 0 !important;
@@ -236,7 +240,7 @@ body {
 	color: var(--gl-navy);
 	background: color-mix(in srgb, var(--gl-sky) 18%, var(--gl-paper));
 	border: 2px solid var(--gl-sky);
-	border-radius: 999px;
+	border-radius: var(--gl-radius);
 	padding: 0.75rem 1.25rem;
 	text-decoration: none;
 	transition: background-color 0.12s ease, border-color 0.12s ease;
@@ -295,6 +299,27 @@ body {
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
 	color: color-mix(in srgb, var(--gl-navy) 55%, transparent);
+}
+
+/* Documentary link: small cropped still on the left, title beside it.
+   Titles wrap, so the shared radius keeps corners matching the pills. */
+.link-btn--doc {
+	display: flex;
+	align-items: center;
+	gap: 0.85rem;
+	text-align: left;
+	font-size: 0.95rem;
+	line-height: 1.3;
+	padding: 0.55rem 1rem 0.55rem 0.55rem;
+}
+
+.doc-thumb {
+	flex: none;
+	width: 80px;
+	height: 45px;
+	/* Kept tight: a radius near the card's makes a 45px-tall image a capsule */
+	border-radius: 0.6rem;
+	object-fit: cover;
 }
 
 /* Closing hairline so it's clear where the set ends */
